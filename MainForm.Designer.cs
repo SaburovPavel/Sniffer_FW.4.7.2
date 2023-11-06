@@ -32,13 +32,13 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.dataGridViewCap = new System.Windows.Forms.DataGridView();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonRefresh = new System.Windows.Forms.Button();
             this.buttonStop = new System.Windows.Forms.Button();
             this.buttonStart = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.comboBoxDevices = new System.Windows.Forms.ComboBox();
-            this.radioButton1View = new System.Windows.Forms.RadioButton();
             this.radioButton2View = new System.Windows.Forms.RadioButton();
+            this.radioButton1View = new System.Windows.Forms.RadioButton();
+            this.comboBoxDevices = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCap)).BeginInit();
@@ -85,7 +85,7 @@
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.button1);
+            this.panel4.Controls.Add(this.buttonRefresh);
             this.panel4.Controls.Add(this.buttonStop);
             this.panel4.Controls.Add(this.buttonStart);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -94,15 +94,15 @@
             this.panel4.Size = new System.Drawing.Size(1113, 45);
             this.panel4.TabIndex = 0;
             // 
-            // button1
+            // buttonRefresh
             // 
-            this.button1.Location = new System.Drawing.Point(257, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 27);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Обновить";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonRefresh.Location = new System.Drawing.Point(257, 3);
+            this.buttonRefresh.Name = "buttonRefresh";
+            this.buttonRefresh.Size = new System.Drawing.Size(100, 30);
+            this.buttonRefresh.TabIndex = 2;
+            this.buttonRefresh.Text = "Обновить";
+            this.buttonRefresh.UseVisualStyleBackColor = true;
+            this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
             // 
             // buttonStop
             // 
@@ -135,13 +135,17 @@
             this.panel2.Size = new System.Drawing.Size(1113, 71);
             this.panel2.TabIndex = 0;
             // 
-            // comboBoxDevices
+            // radioButton2View
             // 
-            this.comboBoxDevices.FormattingEnabled = true;
-            this.comboBoxDevices.Location = new System.Drawing.Point(13, 4);
-            this.comboBoxDevices.Name = "comboBoxDevices";
-            this.comboBoxDevices.Size = new System.Drawing.Size(699, 24);
-            this.comboBoxDevices.TabIndex = 0;
+            this.radioButton2View.AutoSize = true;
+            this.radioButton2View.Location = new System.Drawing.Point(198, 35);
+            this.radioButton2View.Name = "radioButton2View";
+            this.radioButton2View.Size = new System.Drawing.Size(201, 20);
+            this.radioButton2View.TabIndex = 2;
+            this.radioButton2View.TabStop = true;
+            this.radioButton2View.Text = "Time+Source+Dest+Protocol";
+            this.radioButton2View.UseVisualStyleBackColor = true;
+            this.radioButton2View.CheckedChanged += new System.EventHandler(this.radioButton2View_CheckedChanged);
             // 
             // radioButton1View
             // 
@@ -154,17 +158,13 @@
             this.radioButton1View.Text = "Time+Len+rawPacket";
             this.radioButton1View.UseVisualStyleBackColor = true;
             // 
-            // radioButton2View
+            // comboBoxDevices
             // 
-            this.radioButton2View.AutoSize = true;
-            this.radioButton2View.Location = new System.Drawing.Point(198, 35);
-            this.radioButton2View.Name = "radioButton2View";
-            this.radioButton2View.Size = new System.Drawing.Size(201, 20);
-            this.radioButton2View.TabIndex = 2;
-            this.radioButton2View.TabStop = true;
-            this.radioButton2View.Text = "Time+Source+Dest+Protocol";
-            this.radioButton2View.UseVisualStyleBackColor = true;
-            this.radioButton2View.CheckedChanged += new System.EventHandler(this.radioButton2View_CheckedChanged);
+            this.comboBoxDevices.FormattingEnabled = true;
+            this.comboBoxDevices.Location = new System.Drawing.Point(13, 4);
+            this.comboBoxDevices.Name = "comboBoxDevices";
+            this.comboBoxDevices.Size = new System.Drawing.Size(699, 24);
+            this.comboBoxDevices.TabIndex = 0;
             // 
             // MainForm
             // 
@@ -195,7 +195,7 @@
         private System.Windows.Forms.Button buttonStop;
         private System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.ComboBox comboBoxDevices;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonRefresh;
         private System.Windows.Forms.RadioButton radioButton2View;
         private System.Windows.Forms.RadioButton radioButton1View;
     }
