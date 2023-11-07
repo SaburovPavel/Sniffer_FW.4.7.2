@@ -3,13 +3,10 @@ using SharpPcap;
 using SharpPcap.LibPcap;
 using System.Windows.Forms;
 using System.Data;
-using System.Security.Cryptography;
 using System.Drawing;
 using PacketDotNet;
 using PacketDotNet.Ieee80211;
 using System.Net;
-using System.Net.Sockets;
-using System.Net.NetworkInformation;
 using System.IO;
 
 namespace Sniffer_FW._4._7._2
@@ -28,6 +25,14 @@ namespace Sniffer_FW._4._7._2
         {
             InitializeComponent();
             this.dataGridViewCap.SetDoubleBuffered(true);
+        }
+
+        void CountPackets() 
+        {
+            Invoke((MethodInvoker)delegate
+            {
+                labelCountPacket.Text = tableCap.Rows.Count.ToString();
+            });
         }
 
         void RefreshCap()
@@ -91,18 +96,12 @@ namespace Sniffer_FW._4._7._2
             DataColumn columnDescriptionDevice = new DataColumn("Description", typeof(string));
             tableDevices.Columns.Add(columnDescriptionDevice);
 
-
-
             DataColumn columnTime = new DataColumn("Time", typeof(string));
             tableCap.Columns.Add(columnTime);
             DataColumn columnLen = new DataColumn("Len", typeof(string));
             tableCap.Columns.Add(columnLen);
             DataColumn columnrawPacket = new DataColumn("rawPacket", typeof(string));
-            tableCap.Columns.Add(columnrawPacket);
-            //DataColumn columnNumDevice = new DataColumn("NDevice", typeof(int));
-            //tableCap.Columns.Add(columnNumDevice);
-            //DataColumn columnNumDevice = new DataColumn("NDevice", typeof(int));
-            //tableCap.Columns.Add(columnNumDevice);
+            tableCap.Columns.Add(columnrawPacket);            
 
             DataColumn columnTime2 = new DataColumn("Time", typeof(string));
             tableCapView2.Columns.Add(columnTime2);
@@ -184,6 +183,7 @@ namespace Sniffer_FW._4._7._2
             buttonStart.Enabled = true;
             buttonStop.Enabled = false;
             StartStopCap(false);
+            RefreshCap();
             RefreshWithColor();
         }
 
@@ -204,7 +204,7 @@ namespace Sniffer_FW._4._7._2
             var timeToTable = $"{time.Hour}:{time.Minute}:{time.Second},{time.Millisecond}";
             DataRow newRow = tableDevices.NewRow();
             tableCap.Rows.Add(new object[] { timeToTable, len, rawPacket.ToString() });
-
+            CountPackets();
             //EthernetPacket
             var ethernetPacket = packet.Extract<EthernetPacket>();
                       
@@ -341,20 +341,14 @@ namespace Sniffer_FW._4._7._2
             if (ppiPacket != null)
             {
                 MessageBox.Show("PpiPacket");
-            }
-
-
-            //Console.WriteLine("{0}:{1}:{2},{3} Len={4}",
-            //    time.Hour, time.Minute, time.Second, time.Millisecond, len);
-            //Console.WriteLine(rawPacket.ToString());
-
-            RefreshCap();
+            }            
+            
         }
         void AddRowTotableCapView2(string timeToTable, IPAddress sourceIpAddress, IPAddress destinationIpAddress, string protocolType,
                             int packetLength, ushort sourcePort, ushort destinationPort, string udpPackeet)
         {
             tableCapView2.Rows.Add(new object[] { timeToTable, sourceIpAddress, destinationIpAddress, protocolType,
-                            packetLength, sourcePort, destinationPort, udpPackeet });
+                            packetLength, sourcePort, destinationPort, udpPackeet });            
         }
         void StartStopCap(bool action)
         {
@@ -384,17 +378,15 @@ namespace Sniffer_FW._4._7._2
 
             }
         }
-
         private void dataGridViewCap_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {     
             
         }
-
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
+            RefreshCap();
             RefreshWithColor();
         }
-
         private void radioButton2View_CheckedChanged(object sender, EventArgs e)
         {
             RefreshCap();
